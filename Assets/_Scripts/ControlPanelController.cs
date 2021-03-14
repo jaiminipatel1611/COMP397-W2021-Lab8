@@ -10,7 +10,7 @@ public class ControlPanelController : MonoBehaviour
     public Vector2 offScreenPosition;
     public Vector2 onScreenPosition;
 
-    [Range(0.1f, 10.0f)] 
+    [Range(0.1f, 10.0f)]
     public float speed = 1.0f;
     public float timer = 0.0f;
     public bool isOnScreen = false;
@@ -32,23 +32,10 @@ public class ControlPanelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            isOnScreen = !isOnScreen;
-            timer = 0.0f;
-
-            if (isOnScreen)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                playerCamera.enabled = false;
-            }
-            else
-            {
-                
-                Cursor.lockState = CursorLockMode.Locked;
-                playerCamera.enabled = true;
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    ToggleControlPanel();
+        //}
 
         if (isOnScreen)
         {
@@ -57,6 +44,24 @@ public class ControlPanelController : MonoBehaviour
         else
         {
             MoveControlPanelUp();
+        }
+    }
+
+    void ToggleControlPanel()
+    {
+        isOnScreen = !isOnScreen;
+        timer = 0.0f;
+
+        if (isOnScreen)
+        {
+            //Cursor.lockState = CursorLockMode.None;
+            playerCamera.enabled = false;
+        }
+        else
+        {
+
+            //Cursor.lockState = CursorLockMode.Locked;
+            playerCamera.enabled = true;
         }
     }
 
@@ -79,7 +84,12 @@ public class ControlPanelController : MonoBehaviour
 
         if (pausable.isGamePaused)
         {
-           pausable.TogglePause();
+            pausable.TogglePause();
         }
+    }
+
+    public void OnControlButtonPressed()
+    {
+        ToggleControlPanel();
     }
 }
